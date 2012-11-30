@@ -1,0 +1,12 @@
+body {
+  font-family: Univers, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #ff4040;
+}
+
+.roman {
+  font-variant: small-caps;
+}
