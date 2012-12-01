@@ -55,7 +55,7 @@ header > div.button {
     </style>
   </head>
   <body>
-    <header><div>romulusetrem.us</div></header>
+    <header><div>december 2nd, 2012</div></header>
     <p>
       <a href="10print/" style="color:#383bf0"
         data-tags="code art">10 print</a>
@@ -80,6 +80,7 @@ header > div.button {
         data-tags="social code music art video link">tumblr</a>
       <a href="https://twitter.com/romulusouremus"
         style="color:#6400de" data-tags="social link">twitter</a>
+      <span style="color:#888" data-tags="">romulusetrem.us</span>
     </p>
     <script>
 
@@ -90,10 +91,12 @@ var tagged = Array.prototype.slice.call(document
   .querySelectorAll("[data-tags]"));
 tagged.forEach(function(e) {
   e.dataset.tags.split(/\s+/).forEach(function (t) {
-    if (!tags.hasOwnProperty(t)) {
-      tags[t] = [];
+    if (t) {
+      if (!tags.hasOwnProperty(t)) {
+        tags[t] = [];
+      }
+      tags[t].push(e);
     }
-    tags[t].push(e);
   });
 });
 
