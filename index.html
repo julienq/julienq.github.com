@@ -4,41 +4,136 @@
     <title>romulusetrem.us</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="romulusetremus.css">
+    <script src="flexo.js"></script>
     <style>
 
 body {
-  font-size: 96px;
+  margin: 0;
 }
 
 p {
+  padding: 0.1em;
+  font-size: 96px;
   margin: 0;
+}
+
+header {
+  background-color: #222;
+  color: #fef9f0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -o-box;
+  display: box;
+  width: 100%;
+  line-height: 2em;
+  box-shadow: 0 0 1em #222;
+}
+
+header > div {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  text-align: center;
+}
+
+header > div.button {
+  border-left: solid thin #888;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #08f;
+}
+
+.hidden {
+  display: none;
 }
 
     </style>
   </head>
   <body>
+    <header><div>romulusetrem.us</div></header>
     <p>
-      romulusetrem.us
-      <a href="10print/" style="color:#383bf0">10 print</a>
-      <a href="media/svg/patterns" style="color:#19dd89">svg patterns</a>
-      <a href="full-metal-planetoid/" style="color:#403530">full metal
-        planetoid</a>
-      <a href="http://d-d-dakara.tumblr.com/" style="color:#3eb615">dakara</a>
-      <a href="2012/" style="color:#007d13">2012</a>
-      <a href="media/svg/tomato.svg" style="color:red">tomato</a>
-      <a href="http://www.youtube.com/watch?v=oSZVUHNXTL4"
-        style="color:#b7986a">pokett</a>
-      <a href="http://rodatsiuqnoc.bandcamp.com/"
-        style="color:#e75e4c">conquistador</a>
-      <a href="http://www.youtube.com/watch?v=-lRKqxTpjt8"
-        style="color:#fcf405">prisunic</a>
+      <a href="10print/" style="color:#383bf0"
+        data-tags="code art">10 print</a>
+      <a href="media/svg/patterns" style="color:#19dd89"
+        data-tags="art">svg patterns</a>
+      <a href="full-metal-planetoid/" style="color:#403530"
+        data-tags="code game">full metal planetoid</a>
+      <a href="http://d-d-dakara.tumblr.com/" style="color:#3eb615"
+        data-tags="art link">dakara</a>
+      <a href="2012/" style="color:#007d13" data-tags="art">2012</a>
+      <a href="media/svg/tomato.svg" style="color:red"
+        data-tags="art">tomato</a>
+      <a href="http://www.youtube.com/watch?v=oSZVUHNXTL4" style="color:#b7986a"
+        data-tags="music video link">pokett</a>
+      <a href="http://rodatsiuqnoc.bandcamp.com/" style="color:#e75e4c"
+        data-tags="music link">conquistador</a>
+      <a href="http://www.youtube.com/watch?v=-lRKqxTpjt8" style="color:#fcf405"
+        data-tags="music video link">prisunic</a>
       <a href="http://ui.universinternational.org/disques.html#neuf"
-        style="color:#f70586">electro cut-up</a>
-      <a href="http://romulusetremus.tumblr.com/"
-        style="color:#2cd7e6">tumblr</a>
+        style="color:#f70586" data-tags="music link">electro cut-up</a>
+      <a href="http://romulusetremus.tumblr.com/" style="color:#2cd7e6"
+        data-tags="social code music art video link">tumblr</a>
       <a href="https://twitter.com/romulusouremus"
-        style="color:#6400de">twitter</a>
+        style="color:#6400de" data-tags="social link">twitter</a>
     </p>
+    <script>
+
+"use strict";
+
+var tags = {};
+var tagged = Array.prototype.slice.call(document
+  .querySelectorAll("[data-tags]"));
+tagged.forEach(function(e) {
+  e.dataset.tags.split(/\s+/).forEach(function (t) {
+    if (!tags.hasOwnProperty(t)) {
+      tags[t] = [];
+    }
+    tags[t].push(e);
+  });
+});
+
+function select(div) {
+  div.classList.add("selected");
+  tagged.forEach(function (e) {
+    if (e.dataset.tags.split(/\s+/).indexOf(div.textContent) < 0) {
+      e.classList.add("hidden");
+    }
+  });
+}
+
+function deselect() {
+  var sel = document.querySelector(".selected");
+  if (sel) {
+    sel.classList.remove("selected");
+    Array.prototype.forEach.call(document.querySelectorAll(".hidden"),
+      function (e) {
+        e.classList.remove("hidden");
+      });
+  }
+  return sel;
+}
+
+
+var h = document.querySelector("header");
+Object.keys(tags).sort().forEach(function (t) {
+  var div = h.appendChild(flexo.$("div.button", t));
+  div.addEventListener("mousedown", function (e) {
+    e.preventDefault();
+  }, false);
+  div.addEventListener("mouseup", function (e) {
+    var sel = deselect();
+    if (sel !== div) {
+      select(div);
+    }
+  }, false);
+});
+
+    </script>
   </body>
 </html>
 
