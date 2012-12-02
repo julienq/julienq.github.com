@@ -3,6 +3,7 @@
   <head>
     <title>romulusetrem.us</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" href="romulusetremus.css">
     <script src="flexo.js"></script>
     <style>
@@ -15,9 +16,12 @@ p {
   padding: 0.1em;
   font-size: 96px;
   margin: 0;
+  font-weight: 900;
+  line-height: 90px;
 }
 
 header {
+  font-family: Futura;
   background-color: #222;
   color: #fef9f0;
   display: -webkit-box;
@@ -28,6 +32,7 @@ header {
   width: 100%;
   line-height: 2em;
   box-shadow: 0 0 1em #222;
+  margin-bottom: 1em;
 }
 
 header > div {
@@ -39,48 +44,68 @@ header > div {
   text-align: center;
 }
 
-header > div.button {
-  border-left: solid thin #888;
-  cursor: pointer;
-}
-
 .selected {
-  background-color: #08f;
+  background-color: #888;
 }
 
 .hidden {
   display: none;
 }
 
+header > div.button {
+  border-left: solid thin #888;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  p {
+    font-size: 72px;
+    line-height: 68px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date {
+    display: none;
+  }
+  header > div.button:nth-child(2) {
+    border: none;
+  }
+  p {
+    font-size: 48px;
+    line-height: 44px;
+  }
+}
+
     </style>
   </head>
   <body>
-    <header><div>december 2nd, 2012</div></header>
+    <header><div class="date">december 2nd, 2012</div></header>
     <p>
+      <span style="color:#888" data-tags="">ro&#8203;mu&#8203;lus&#8203;et&#8203;rem.&#8203;us</span>
       <a href="10print/" style="color:#383bf0"
         data-tags="code art">10 print</a>
       <a href="media/svg/patterns" style="color:#19dd89"
-        data-tags="art">svg patterns</a>
+        data-tags="art">svg pat&#8203;terns</a>
       <a href="full-metal-planetoid/" style="color:#403530"
-        data-tags="code game">full metal planetoid</a>
+        data-tags="code game">full me&#8203;tal pla&#8203;ne&#8203;toid</a>
       <a href="http://d-d-dakara.tumblr.com/" style="color:#3eb615"
-        data-tags="art link">dakara</a>
+        data-tags="art link">da&#8203;ka&#8203;ra</a>
       <a href="2012/" style="color:#007d13" data-tags="art">2012</a>
       <a href="media/svg/tomato.svg" style="color:red"
-        data-tags="art">tomato</a>
+        data-tags="art">to&#8203;ma&#8203;to</a>
       <a href="http://www.youtube.com/watch?v=oSZVUHNXTL4" style="color:#b7986a"
-        data-tags="music video link">pokett</a>
+        data-tags="music video link">po&#8203;kett</a>
       <a href="http://rodatsiuqnoc.bandcamp.com/" style="color:#e75e4c"
-        data-tags="music link">conquistador</a>
+        data-tags="music link">con&#8203;qui&#8203;sta&#8203;dor</a>
       <a href="http://www.youtube.com/watch?v=-lRKqxTpjt8" style="color:#fcf405"
-        data-tags="music video link">prisunic</a>
+        data-tags="music video link">pri&#8203;su&#8203;nic</a>
       <a href="http://ui.universinternational.org/disques.html#neuf"
         style="color:#f70586" data-tags="music link">electro cut-up</a>
       <a href="http://romulusetremus.tumblr.com/" style="color:#2cd7e6"
         data-tags="social code music art video link">tumblr</a>
       <a href="https://twitter.com/romulusouremus"
         style="color:#6400de" data-tags="social link">twitter</a>
-      <span style="color:#888" data-tags="">romulusetrem.us</span>
     </p>
     <script>
 
