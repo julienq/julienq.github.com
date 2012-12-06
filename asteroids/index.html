@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Asteroids</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="zap.css">
+    <link rel="stylesheet" href="asteroids.css">
+  </head>
+  <body class="zap-frame">
+    <div class="zap-content">
+      <svg class="zap-full" viewBox="0 0 1600 1200">
+        <defs>
+          <clipPath id="clip">
+            <rect id="bg" width="1600" height="1200"/>
+          </clipPath>
+          <clipPath id="scroll-clip">
+            <rect y="700" height="550" width="1600" fill="red"/>
+          </clipPath>
+          <path id="ship" d="M20,0L-20,15L-10,0L-20,-15Z"/>
+          <path id="saucer" d="M20,-15 40,0 20,15 -20,15 -40,0 -20,-15 -15,-40
+            15,-40 20,-15 -20,-15"/>
+          </g>
+          <circle id="bullet" r="4"/>
+          <line id="debris" x1="-7" x2="8"/>
+        </defs>
+        <g clip-path="url(#clip)" font-family="Codystar, sans-serif">
+          <g id="background" fill="white"/>
+          <g>
+            <text id="message" text-anchor="middle" x="800" y="400"
+              font-size="200" fill="yellow"/>
+            <text id="addl-message" text-anchor="middle" x="800" y="600"
+              font-size="100" fill="white"/>
+            <text id="score" text-anchor="end" x="1580" y="120"
+              font-size="120" fill="yellow"/>
+            <text id="fps" text-anchor="end" x="1580" y="1200" font-size="80"
+              fill="yellow"/>
+          </g>
+          <g id="cosmos" data-running="true" stroke-linejoin="round"
+            stroke-linecap="round" stroke-width="8" stroke="white" fill="none">
+            <g id="scroller" data-proto="$.scroller" stroke="none" data-h="270"
+              text-anchor="middle" data-clip="url(#scroll-clip)"
+              data-enabled="">
+              <g transform="translate(800)" fill="white" font-size="80">
+                <text id="hiscore" font-size="120" fill="yellow"/>
+                <text y="300" font-size="120">Controls</text>
+                <text y="400"><tspan fill="yellow">Left</tspan> and
+                  <tspan fill="yellow">right</tspan> arrows to steer</text>
+                <text y="500"><tspan fill="yellow">Up</tspan> arrow to
+                  thrust</text>
+                <text y="600"><tspan fill="yellow">Space</tspan> to shoot</text>
+                <text y="700"><tspan fill="yellow">Down</tspan> arrow for
+                  hyperspace</text>
+                <text y="800"><tspan fill="yellow">P</tspan> to pause and
+                  resume</text>
+                <text y="1000" font-size="120">Scoring</text>
+                <text y="1100">Large asteroid: <tspan fill="yellow">20</tspan>
+                  points</text>
+                <text y="1200">Medium asteroid: <tspan fill="yellow">50</tspan>
+                  points</text>
+                <text y="1300">Small asteroid: <tspan fill="yellow">100</tspan>
+                  points</text>
+                <text y="1400">Large saucer: <tspan fill="yellow">200</tspan>
+                  points</text>
+                <text y="1500">Small saucer: <tspan fill="yellow">1000</tspan>
+                  points</text>
+                <text y="1600">New life every <tspan fill="yellow">10000</tspan>
+                  points</text>
+              </g>
+            </g>
+            <g id="asteroids" data-proto="zap.system"/>
+            <g id="saucers" data-proto="zap.system"/>
+            <g id="points" data-proto="zap.system" fill="yellow" stroke="none"
+              font-size="80" text-anchor="middle"/>
+              <g id="lives" data-proto="zap.system" stroke="yellow"
+                stroke-width="2" stroke-dasharray="2 4"/>
+            <g id="player" data-proto="zap.system"/>
+            <g id="bullets" data-proto="zap.system"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <footer>
+      Copyright © <span class="roman">mmxii</span>
+      <a href="http://romulusetrem.us/">romulusetrem.us</a> ☄ Find it on <a
+        href="https://github.com/julienq/zap/tree/master/asteroids">Github</a>
+    </footer>
+
+    <audio id="bullet_sound" src="bullet.wav" preload="auto"></audio>
+    <audio id="explosion_asteroid_sound" src="explosion_small.wav"
+      preload="auto"></audio>
+    <audio id="explosion_ship_sound" src="explosion_big.wav"
+      preload="auto"></audio>
+    <audio id="game_over_sound" src="game_over.wav" preload="auto"></audio>
+    <audio id="hyperspace_sound" src="hyperspace.wav" preload="auto"></audio>
+    <audio id="message_sound" src="message.wav" preload="auto"></audio>
+    <audio id="new_life_sound" src="new_life.wav" preload="auto"></audio>
+
+    <ul class="zap-params">
+      <li data-param="ANY_KEY">Press any key to start</li>
+      <li data-param="ASTEROID_V" data-range="50 100">
+      <li data-param="ASTEROID_VR" data-range="5 15">
+      <li data-param="ASTEROID_3_R" data-num="60">
+      <li data-param="ASTEROID_3_R_AMP" data-num="5">
+      <li data-param="ASTEROID_3_SCORE" data-num="20">
+      <li data-param="ASTEROID_3_SECTORS" data-num="16">
+      <li data-param="ASTEROID_2_R" data-num="35">
+      <li data-param="ASTEROID_2_R_AMP" data-num="5">
+      <li data-param="ASTEROID_2_SCORE" data-num="50">
+      <li data-param="ASTEROID_2_SECTORS" data-num="12">
+      <li data-param="ASTEROID_1_R" data-num="20">
+      <li data-param="ASTEROID_1_R_AMP" data-num="3">
+      <li data-param="ASTEROID_1_SCORE" data-num="100">
+      <li data-param="ASTEROID_1_SECTORS" data-num="12">
+      <li data-param="ASTEROID_POWERUP_P" data-num="0.05">
+      <li data-param="ASTEROIDS_MIN" data-num="4">
+      <li data-param="ASTEROIDS_MAX" data-num="12">
+      <li data-param="BULLET_RANGE" data-num="600">
+      <li data-param="BULLET_V" data-num="600">
+      <li data-param="DEBRIS_TTL" data-range="0.5 2">
+      <li data-param="FIRE_RATE" data-num="200">
+      <li data-param="FLASH_DUR_MS" data-num="250">
+      <li data-param="GAME_OVER">GAME OVER</li>
+      <li data-param="HISCORE">HI SCORE: {0}</li>
+      <li data-param="NEW_LIFE" data-num="10000">
+      <li data-param="NEW_HI_SCORE">NEW HI SCORE!</li>
+      <li data-param="LEVEL">LEVEL {0}</li>
+      <li data-param="LIVES" data-num="3">
+      <li data-param="PAUSED">PAUSED</li>
+      <li data-param="PLUME_ARC" data-num="20">
+      <li data-param="PLUME_TTL" data-range="0.1 0.3">
+      <li data-param="PLUME_N" data-range="1 2">
+      <li data-param="PLUME_R" data-range="1 3">
+      <li data-param="READY">READY</li>
+      <li data-param="READY_DELAY_MS" data-num="1250">
+      <li data-param="READY_DUR_MS" data-num="1250">
+      <li data-param="SAUCER_OFF" data-range="20 100">
+      <li data-param="SAUCER_R" data-range="-10 10">
+      <li data-param="SAUCER_RADIUS" data-range="40">
+      <li data-param="SAUCER_R_COLLIDE" data-num="30">
+      <li data-param="SAUCER_T" data-range="10000 30000">
+      <li data-param="SAUCER_T_FIRE" data-range="500 1000">
+      <li data-param="SAUCER_SMALL_SCALE" data-num="0.8">
+      <li data-param="SAUCER_SMALL_SCORE" data-num="1000">
+      <li data-param="SAUCER_SCORE" data-num="200">
+      <li data-param="SAUCER_VELOCITY" data-range="150 300">
+      <li data-param="SAUCER_Y" data-range="0.25 0.75">
+      <li data-param="SCROLL_DELAY_MS" data-num="2000">
+      <li data-param="SCROLL_V" data-num="70">
+      <li data-param="SCROLL_Y" data-num="1000">
+      <li data-param="SHAKE_AMP" data-num="2">
+      <li data-param="SHAKE_DUR_MS" data-num="250">
+      <li data-param="SHIP_ACCEL" data-num="900">
+      <li data-param="SHIP_DECEL" data-num="-150">
+      <li data-param="SHIP_DEBRIS" data-num="20">
+      <li data-param="SHIP_RADIUS" data-num="20">
+      <li data-param="SHIP_R_COLLIDE" data-num="10">
+      <li data-param="SHIP_VMIN" data-num="0">
+      <li data-param="SHIP_VMAX" data-num="400">
+      <li data-param="SHIP_VH" data-num="150">
+      <li data-param="SPEEDUP" data-num="1.5">
+      <li data-param="STAR_DENSITY" data-num="0.0005">
+      <li data-param="STAR_RADIUS" data-num="3">
+      <li data-param="TITLE">ASTEROIDS</li>
+      <li data-param="VOLUME" data-num="0.25">
+      <li data-param="ZAP_AUDIO_CHANNELS" data-num="32">
+    </ul>
+
+    <script src="zap.js"></script>
+    <script src="asteroids.js"></script>
+  </body>
+</html>
