@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "BentonSans Regular";
+  src: local("☺"), url("media/fonts/benton-sans-regular.otf") format("opentype");
+}
+
 body {
-  font-family: Univers, "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "BentonSans Regular", Univers, "Helvetica Neue", Helvetica,
+    sans-serif;
 }
 
 a {

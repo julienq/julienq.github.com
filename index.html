@@ -8,7 +8,13 @@
     <script src="flexo.js"></script>
     <style>
 
+@font-face {
+  font-family: "BentonSans Black";
+  src: local("☺"), url("media/fonts/benton-sans-black.otf") format("opentype");
+}
+
 body {
+  font-family: "BentonSans Black", sans-serif;
   margin: 0;
 }
 
@@ -16,13 +22,11 @@ p {
   padding: 0.1em;
   font-size: 96px;
   margin: 0;
-  font-weight: 900;
-  line-height: 92px;
 }
 
 p img {
   height: 90px;
-  vertical-align: bottom;
+  vertical-align: top;
 }
 
 a img {
@@ -69,7 +73,6 @@ header > div.button {
 @media (max-width: 720px) {
   p {
     font-size: 72px;
-    line-height: 68px;
   }
   p img {
     height: 68px;
@@ -85,7 +88,6 @@ header > div.button {
   }
   p {
     font-size: 48px;
-    line-height: 44px;
   }
   p img {
     height: 44px;
