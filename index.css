@@ -1,0 +1,85 @@
+@font-face {
+  font-family: "BentonSans Black";
+  src: local("☺"), url("media/fonts/benton-sans-black.otf") format("opentype");
+}
+
+body {
+  font-family: "BentonSans Black", sans-serif;
+  margin: 0;
+}
+
+p {
+  padding: 0.1em;
+  font-size: 96px;
+  margin: 0;
+}
+
+p img {
+  height: 90px;
+  vertical-align: top;
+}
+
+a img {
+  border: 0;
+}
+
+header {
+  font-family: Futura, "Gill Sans", sans-serif;
+  background-color: #222;
+  color: #fef9f0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -o-box;
+  display: box;
+  width: 100%;
+  line-height: 2em;
+  box-shadow: 0 0 1em #222;
+  margin-bottom: 1em;
+}
+
+header > div {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  text-align: center;
+}
+
+.selected {
+  background-color: #888;
+}
+
+.hidden {
+  display: none;
+}
+
+header > div.button {
+  border-left: solid thin #888;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  p {
+    font-size: 72px;
+  }
+  p img {
+    height: 68px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date {
+    display: none;
+  }
+  header > div.button:nth-child(2) {
+    border: none;
+  }
+  p {
+    font-size: 48px;
+  }
+  p img {
+    height: 44px;
+  }
+}

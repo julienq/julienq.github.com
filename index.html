@@ -5,99 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" href="romulusetremus.css">
-    <script src="flexo.js"></script>
-    <style>
-
-@font-face {
-  font-family: "BentonSans Black";
-  src: local("☺"), url("media/fonts/benton-sans-black.otf") format("opentype");
-}
-
-body {
-  font-family: "BentonSans Black", sans-serif;
-  margin: 0;
-}
-
-p {
-  padding: 0.1em;
-  font-size: 96px;
-  margin: 0;
-}
-
-p img {
-  height: 90px;
-  vertical-align: top;
-}
-
-a img {
-  border: 0;
-}
-
-header {
-  font-family: Futura, "Gill Sans", sans-serif;
-  background-color: #222;
-  color: #fef9f0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-box;
-  display: -o-box;
-  display: box;
-  width: 100%;
-  line-height: 2em;
-  box-shadow: 0 0 1em #222;
-  margin-bottom: 1em;
-}
-
-header > div {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -ms-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  text-align: center;
-}
-
-.selected {
-  background-color: #888;
-}
-
-.hidden {
-  display: none;
-}
-
-header > div.button {
-  border-left: solid thin #888;
-  cursor: pointer;
-}
-
-@media (max-width: 720px) {
-  p {
-    font-size: 72px;
-  }
-  p img {
-    height: 68px;
-  }
-}
-
-@media (max-width: 480px) {
-  .date {
-    display: none;
-  }
-  header > div.button:nth-child(2) {
-    border: none;
-  }
-  p {
-    font-size: 48px;
-  }
-  p img {
-    height: 44px;
-  }
-}
-
-    </style>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <header><div class="date">6 dec. 2012</div></header>
+    <header><div class="date">7 dec. 2012</div></header>
     <p>
       <span style="color:#888" data-tags="">ro&#8203;mu&#8203;lus&#8203;et&#8203;rem.&#8203;us <img src="media/png/louve.png" alt="she wolf"></span>
       <a href="asteroids/" style="color:#ff0"
@@ -157,61 +68,8 @@ header > div.button {
       <a href="mailto:pom@romulusetrem.us" style="color:#47092e"
         data-tags="social">con&#8203;tact</a>
     </p>
-    <script>
-
-"use strict";
-
-var tags = {};
-var tagged = Array.prototype.slice.call(document
-  .querySelectorAll("[data-tags]"));
-tagged.forEach(function(e) {
-  e.dataset.tags.split(/\s+/).forEach(function (t) {
-    if (t) {
-      if (!tags.hasOwnProperty(t)) {
-        tags[t] = [];
-      }
-      tags[t].push(e);
-    }
-  });
-});
-
-function select(div) {
-  div.classList.add("selected");
-  tagged.forEach(function (e) {
-    if (e.dataset.tags.split(/\s+/).indexOf(div.textContent) < 0) {
-      e.classList.add("hidden");
-    }
-  });
-}
-
-function deselect() {
-  var sel = document.querySelector(".selected");
-  if (sel) {
-    sel.classList.remove("selected");
-    Array.prototype.forEach.call(document.querySelectorAll(".hidden"),
-      function (e) {
-        e.classList.remove("hidden");
-      });
-  }
-  return sel;
-}
-
-
-var h = document.querySelector("header");
-Object.keys(tags).sort().forEach(function (t) {
-  var div = h.appendChild(flexo.$("div.button", t));
-  div.addEventListener("mousedown", function (e) {
-    e.preventDefault();
-  }, false);
-  div.addEventListener("mouseup", function (e) {
-    var sel = deselect();
-    if (sel !== div) {
-      select(div);
-    }
-  }, false);
-});
-
-    </script>
+    <script src="flexo.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
 
