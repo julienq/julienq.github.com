@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>After Vera Molnar</title>
+  <script xlink:href="../../flexo.js"/>
+  <defs>
+    <line id="l0" x2="10" y2="10"/>
+    <line id="l1" x1="10" y2="10"/>
+    <line id="l2" x1="5" x2="5" y2="10"/>
+    <line id="l3" y1="5" x2="10" y2="5"/>
+  </defs>
+  <rect fill="#e3e6e8"/>
+  <g stroke="#0f1114" stroke-width="2" stroke-linecap="square"/>
+  <script><![CDATA[
+
+"use strict";
+
+var W = 24;
+var H = 24;
+var SZ = 10;
+
+var svg = document.querySelector("svg");
+svg.setAttribute("viewBox", "{0} {0} {1} {2}".fmt(-SZ, (W + 2) * SZ, (H + 2) * SZ));
+
+var rect = document.querySelector("rect");
+rect.setAttribute("x", -SZ);
+rect.setAttribute("y", -SZ);
+rect.setAttribute("width", (W + 2) * SZ);
+rect.setAttribute("height", (H + 2) * SZ);
+
+var g = document.querySelector("g");
+for (var y = 0; y < H; ++y) {
+  var row =
+    g.appendChild(flexo.$g({ transform: "translate(0, {0})".fmt(y * SZ) }));
+  for (var x = 0; x < W; ++x) {
+    row.appendChild(flexo.$use({ x: x * SZ,
+      "xlink:href": "#l{0}".fmt(flexo.random_int(3)) }));
+  }
+}
+
+  ]]></script>
+</svg>
+
