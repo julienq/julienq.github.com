@@ -1,6 +1,9 @@
 (function () {
   "use strict";
 
+  // TODO fix sound
+  zap.play_sound = function () {};
+
   // TODO hide score when not in game
   // TODO filter (toggle on/off with F)
   // TODO improve keyboard controls
