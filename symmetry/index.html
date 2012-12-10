@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Symmetry | romulusetrem.us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" href="../romulusetremus.css">
+    <style type="text/css">
+
+html, body {
+  margin: 0;
+}
+
+a {
+  color: #bf9cbc;
+}
+
+.center {
+  text-align: center;
+}
+
+.left, .right {
+  text-align: right;
+  display: inline-block;
+}
+
+.right {
+  -o-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+canvas {
+  background-color: #ffc;
+  margin: 1em 0;
+}
+
+canvas.drag {
+  background-color: #bf9cbc !important;
+}
+
+p, ol { 
+  margin: 1em;
+}
+
+footer {
+  margin-top: 4em;
+  margin-bottom: 1em;
+  text-align: center;
+  font-size: smaller;
+}
+
+#drag {
+  text-decoration: line-through;
+}
+
+input {
+  width: 40em;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <h1><div class="left">Symmetry</div>
+        <div class="right">Symmetry</div></h1>
+      <canvas width="640" height="640"></canvas>
+    </div>
+    <ol>
+      <li id="drag">Drag and drop a picture in the gray box above.</li>
+      <script>
+        var drag = document.getElementById("drag");
+        if ("draggable" in drag) drag.style.textDecoration = "none";
+      </script>
+      <li>Click and drag inside the box above.</li>
+      <li><a id="save" href="javascript:window.save_image()">Save</a> the
+      result*, or...</li>
+      <li>... <a id="reset" href="javascript:window.retry()">try
+        again</a>!</li>
+    </ol>
+    <p>Hint: results differ if you move from right to left or left to
+      right. (*) Saving may fail due to security reasons :(</li>
+    </ol>
+    <p>You may also give an image URL here: <input type="text"></p>
+
+    <footer>
+      Copyright © <span class="roman">mmxii</span>
+      <a href="http://romulusetrem.us/">romulusetrem.us</a> ☄ Find it on <a
+        href="https://github.com/julienq/romulusetrem.us/tree/master/symmetry">Github</a>
+    </footer>
+
+    <script src="symmetry.js"></script>
+  </body>
+</html>
