@@ -33,12 +33,13 @@ function make_circle(synth) {
   set_transform(circle, x, y);
 
   var v = synth.volume;
-  var on = true;
+  var on;
   var set_on = function (o) {
     on = o;
     synth.volume = on ? v : 0;
     circle.setAttribute("fill-opacity", on ? 1 : 0);
   };
+  set_on(Math.random() < 0.8);
 
   var unlocked = false;
   var down = function (e) {
