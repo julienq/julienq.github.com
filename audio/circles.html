@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Circlesynths</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta charset="UTF-8">
+    <style>
+body {
+  font-family: Univers, "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+.roman {
+  font-variant: small-caps;
+}
+
+p {
+  position: absolute;
+  padding: 0 1em;
+  text-shadow: 1px 1px 0 #f8f9f0; 
+}
+
+p.bottom {
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #ff4040;
+}
+
+svg {
+  background-color: #f8f9f0;
+}
+    </style>
+    <script src="flexo.js" charset="utf-8"></script>
+    <script src="audio.js"></script>
+  </head>
+  <body>
+    <p>
+      Don’t play too loud and click around! ☞
+      <label for="count">Circles:</label>
+      <input id="count-range" type="range" name="count" min="0" max="100"
+          value="0">
+    </p>
+    <p class="bottom">
+      <a href="http://romulusetrem.us">romulusetrem.us </a>
+      <span class="roman">mcmxiii</span>
+    </p>
+    <svg viewBox="-40 -40 480 480"></svg>
+    <script src="circles.js"></script>
+  </body>
+</html>
+
