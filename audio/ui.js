@@ -8,9 +8,9 @@
     this.children = [];
   };
 
-  ui.handler.prototype.togglable = function () {
+  ui.handler.prototype.togglable = function (mask) {
     if (!this.toggle) {
-      this.toggle = new ui.togglable(this);
+      this.toggle = new ui.togglable(this, mask);
       this.children.push(this.toggle);
     }
     return this;
@@ -37,17 +37,18 @@
     if (this.committed == child) {
       delete this.committed;
     }
-  }
+  };
 
-  ui.togglable = function (parent) {
+  ui.togglable = function (parent, mask) {
     this.parent = parent;
+    this.mask = mask || this.parent.element;
     flexo.make_property(this, "enabled", function (enabled) {
       if (enabled) {
-        this.parent.element.addEventListener("mousedown", this, false);
-        this.parent.element.addEventListener("touchstart", this, false);
+        this.mask.addEventListener("mousedown", this, false);
+        this.mask.addEventListener("touchstart", this, false);
       } else {
-        this.parent.element.removeEventListener("mousedown", this, false);
-        this.parent.element.removeEventListener("touchstart", this, false);
+        this.mask.removeEventListener("mousedown", this, false);
+        this.mask.removeEventListener("touchstart", this, false);
       }
       return enabled;
     });
@@ -66,9 +67,12 @@
     if (e.type == "mousedown") {
       document.addEventListener("mouseup", this, false);
       this.begin();
-    } else if (e.type == "mouseup") {
+    } else if (e.type == "touchstart") {
+      document.addEventListener("touchend", this, false);
+      this.begin();
+    } else if (e.type == "mouseup" || e.type == "touchend") {
       this.cancel();
-      if (e.target == this.parent.element) {
+      if (e.target == this.mask) {
         this.parent.commit(this);
         this.done();
       }
@@ -96,26 +100,26 @@
 
   ui.draggable.prototype.start = function (e) {
     e.preventDefault();
-    this.x = this.parent.element.cx ? "cx" : "x";
-    this.y = this.parent.element.cy ? "cy" : "y";
-    this.position = { x: this.parent.element[this.x].baseVal.value,
-      y: this.parent.element[this.y].baseVal.value };
     this.origin = flexo.event_svg_point(e, this.parent.svg);
+    this.transform = this.parent.element.getAttribute("transform");
     this.begin();
   };
 
   ui.draggable.prototype.move = function (e) {
     if (!this.committed) {
       this.parent.commit(this);
+      this.position = this.parent.svg.createSVGPoint().matrixTransform(this
+        .parent.svg.getTransformToElement(this.parent.element).inverse());
     }
     this.committed = true;
-    var p = flexo.event_svg_point(e, this.parent.svg);
-    p.x += this.position.x - this.origin.x;
-    p.y += this.position.y - this.origin.y;
-    p = this.progress(p);
-    if (p) {
-      this.parent.element.setAttribute(this.x, p.x);
-      this.parent.element.setAttribute(this.y, p.y);
+    var t = flexo.event_svg_point(e, this.parent.svg);
+    t.x -= this.origin.x;
+    t.y -= this.origin.y;
+    var p = this.progress({ x: this.position.x + t.x,
+      y: this.position.y + t.y });
+    if (t) {
+      this.parent.element.setAttribute("transform", "translate(%0, %1) %2"
+          .fmt(p.x - this.position.x, p.y - this.position.y, this.transform));
     }
   };
 
@@ -133,6 +137,12 @@
     delete this.committed;
     this.parent.uncommit(this);
     this.done();
+    var transform = this.parent.element.transform.baseVal;
+    if (transform) {
+      var m = transform.consolidate().matrix;
+      this.parent.element.setAttribute("transform",
+          "matrix(%0, %1, %2, %3, %4, %5)".fmt(m.a, m.b, m.c, m.d, m.e, m.f));
+    }
   };
 
   ui.draggable.prototype.handleEvent = function (e) {
