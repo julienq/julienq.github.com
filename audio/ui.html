@@ -17,11 +17,14 @@ a {
   </head>
   <body>
     <svg viewBox="0 0 400 400">
+    <!--
       <g transform="translate(0, 200) rotate(90) scale(2)">
+      -->
         <circle r="40" stroke="black"></circle>
         <circle r="20" cx="10" fill="orange"></circle>
-        <circle r="40" fill-opacity="0" class="mask"></circle>
+        <!--
       </g>
+      -->
     </svg>
     <script src="flexo.js"></script>
     <script src="ui.js"></script>
@@ -29,18 +32,21 @@ a {
 
 "use script";
 var svg = document.querySelector("svg");
-var circle = svg.querySelector("g");
-var h = new ui.handler(circle, svg).draggable()
-  .togglable(circle.querySelector(".mask"));
-h.drag.progress = function (p) {
-  p.x = flexo.clamp(p.x, 0, 400);
-  p.y = flexo.clamp(p.y, 0, 400);
-  return p;
-}
-h.toggle.done = function () {
-  this.on = !this.on;
-  this.parent.element.setAttribute("fill-opacity", this.on ? 0 : 1);
-}
+
+Array.prototype.forEach.call(svg.querySelectorAll("circle"), function (circle) {
+  var h = new ui.handler(circle, svg).draggable().togglable();
+  h.drag.progress = function (p) {
+    p.x = flexo.clamp(p.x, 0, 400);
+    p.y = flexo.clamp(p.y, 0, 400);
+    return p;
+  }
+  document.addEventListener("mousedown", h.drag, false);
+  document.addEventListener("touchstart", h.drag, false);
+  h.toggle.done = function () {
+    this.on = !this.on;
+    this.parent.element.setAttribute("fill-opacity", this.on ? 0 : 1);
+  }
+});
 
     </script>
   </body>
