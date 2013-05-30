@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>The password is “Kangaroo”</title>
+    <meta name="viewport" content="width=device-width,user-scalable=0">
+    <meta charset="UTF-8">
+    <style>
+body {
+  font-family: Univers, "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+.roman {
+  font-variant: small-caps;
+}
+
+a {
+  text-decoration: none;
+  color: #ff4040;
+}
+
+p {
+  position: absolute;
+  padding: 0 1em;
+}
+
+p.bottom {
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+}
+    </style>
+    <script src="flexo.js" charset="utf-8"></script>
+    <script src="audio.js"></script>
+  </head>
+  <body>
+    <p>The password is “Kangaroo” (on Chrome or Safari it is.)</p>
+    <p class="bottom">
+      <a href="http://romulusetrem.us">romulusetrem.us</a> &bull;
+      <a href="https://github.com/julienq/julienq.github.com/tree/master/audio">Github</a> &bull;
+      <span class="roman">mcmxiii</span>
+    </p>
+    <script>
+
+flexo.ez_xhr("kangaroo.m4a", { responseType: "arraybuffer" }, function (req) {
+  flexo.audio.context.decodeAudioData(req.response, function (buffer) {
+    var source = flexo.audio.context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(flexo.audio.context.destination);
+    source.loop = true;
+    var source2 = flexo.audio.context.createBufferSource();
+    source2.buffer = buffer;
+    source2.connect(flexo.audio.context.destination);
+    source2.loop = true;
+    source2.loopEnd = buffer.duration - 0.07;
+    source.noteOn(0);
+    source2.noteOn(0);
+  });
+});
+
+    </script>
+  </body>
+</html>
+
